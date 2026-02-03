@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Will You Be My Valentine?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 20px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+  }
+
+  #noBtn {
+    background: #ddd;
+    position: relative;
+  }
+
+  .celebrate {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .celebrate h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: gold;
+    animation: fall 3s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-100px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Will you be my Valentine? 💖</h1>
+  <button id="yesBtn">Yes 💘</button>
+  <button id="noBtn">No 🙈</button>
+</div>
+
+<div class="celebrate" id="celebrate">
+  <h2>Yayyy! 💃🕺</h2>
+  <p>You just made my Valentine’s Day ❤️</p>
+  <audio autoplay loop>
+    <source src="https://pixabay.com/music/lofi-lo-fi-music-loop-sentimental-jazzy-love-473154/" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const celebrate = document.getElementById("celebrate");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.8)`;
+  });
+
+  yesBtn.addEventListener("click", () => {
+    celebrate.style.display = "flex";
+
+    document.querySelectorAll(".confetti").forEach(c => c.remove());
+
+    for (let i = 0; i < 60; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.background =
+        ["#ff4d6d", "#ffd166", "#06d6a0", "#4cc9f0"][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+      document.body.appendChild(confetti);
+    }
+  });
+</script>
+
+</body>
+</html>
